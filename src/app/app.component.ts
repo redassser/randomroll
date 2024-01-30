@@ -13,15 +13,22 @@ import { set } from './set.component';
 export class AppComponent {
   looking: string = "";
   lookingLock: boolean = false;
+  refArray: ComponentRef<set>[] = [];
   @ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
   ref!: ComponentRef<set>;
   addChild() {
     this.ref = this.vcr.createComponent(set);
+    this.refArray.push(this.ref);
     this.ref.instance.newLookEvent.subscribe(v => this.looking = v.func);
   }
   onKey(event: any) {
     console.log(event.target.value);
     this.ref.instance.func = event.target.value;
+  }
+  Results() {
+    this.refArray.forEach(ref => {
+      ref.instance.result();
+    });
   }
 }
 
