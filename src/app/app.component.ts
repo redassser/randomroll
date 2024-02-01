@@ -19,7 +19,7 @@ export class AppComponent {
   addChild() {
     this.ref = this.vcr.createComponent(set);
     this.refArray.push(this.ref);
-    this.ref.instance.newLookEvent.subscribe(v => this.looking = v.func);
+    this.ref.instance.newLookEvent.subscribe((v: set) => this.looking = v.func);
   }
   onKey(event: any) {
     console.log(event.target.value);
@@ -27,8 +27,7 @@ export class AppComponent {
   }
   Results() {
     this.refArray.forEach(ref => {
-      let res = ref.instance.parse();
-      console.log(res);
+      ref.instance.Result();
     });
   }
 }

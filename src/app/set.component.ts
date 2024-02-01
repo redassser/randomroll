@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Injectable, Output } from '@angular/core';
+import { Component, ComponentRef, ViewChild, ViewContainerRef, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { trid } from './trid.component';
 
 var reg = /\s*(?<dice>\d*d\d+)|(?<number>\d+)|(?<operator>\+|\-|\*|\/\/|\/|\(|\))/g;
 interface token {
@@ -81,11 +82,17 @@ export class set {
       lbp: 0
     }
   }
+  @ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
+  ref!: ComponentRef<set>;
   @Output() newLookEvent = new EventEmitter<set>();
   setLook(): void {
     this.newLookEvent.emit(this);
   }
-  parse(): number {
+  Result(): void {
+    let res = this.parse();
+    this.ref = this.vcr.createComponent(trid, res);
+  }
+  private parse(): number {
     this.tokenize();
     this.token_index = 0;
     this.token = this.tokens[this.token_index];
