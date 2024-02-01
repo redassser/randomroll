@@ -27,7 +27,8 @@ export class AppComponent {
   }
   Results() {
     this.refArray.forEach(ref => {
-      ref.instance.result();
+      let res = ref.instance.parse();
+      console.log(res);
     });
   }
 }
