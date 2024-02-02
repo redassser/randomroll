@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 @Component({
     selector: "trid",
@@ -9,7 +10,4 @@ import { RouterOutlet } from '@angular/router';
 })
 export class trid {
     content: string = ""
-    contructor(res: number) {
-        this.content = res.toString();
-    }
 }

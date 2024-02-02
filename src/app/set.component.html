@@ -1,5 +1,8 @@
 <div class="set">
-  <div class="settitle"><button (click)="setLook()"></button>{{title}}</div>
+  <div class="settop">
+    <button class="setbutton" (click)="setLook()"></button>
+    <div class="settitle">{{title}}</div>
+  </div>
   <ng-container class="res" #viewContainerRef/>
 </div>
 <router-outlet></router-outlet>

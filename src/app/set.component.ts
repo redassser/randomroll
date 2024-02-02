@@ -18,12 +18,16 @@ interface token {
   styleUrl: './app.component.css'
 })
 export class set {
-  title: string = "new";
-  func: string = "1d" + Math.floor(Math.random() * 6 + 1); // might change to another struct later
+  title: string = "";
+  func: string = "" // might change to another struct later
   private tokens: token[] = [];
   private token!: token;
   token_index: number = 0;
   working_val: number = 0;
+  constructor() {
+    this.func = "1d" + Math.floor(Math.random() * 6 + 1);
+    this.title = this.func;
+  }
   readonly token_list: { [key: string]: token } = {
     "+": {
       value: "+",
@@ -83,14 +87,15 @@ export class set {
     }
   }
   @ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
-  ref!: ComponentRef<set>;
+  ref!: ComponentRef<trid>;
   @Output() newLookEvent = new EventEmitter<set>();
   setLook(): void {
     this.newLookEvent.emit(this);
   }
   Result(): void {
-    let res = this.parse();
-    this.ref = this.vcr.createComponent(trid, res);
+    let res: number = this.parse();
+    this.ref = this.vcr.createComponent(trid);
+    this.ref.instance.content = res.toString();
   }
   private parse(): number {
     this.tokenize();
@@ -104,7 +109,7 @@ export class set {
     for (const match of matches!) {
       let type = Object.keys(match.groups!).find(key => match.groups![key]);
       switch(type) {
-        case "number": 
+        case "number":
           this.working_val = Number(match[0]);
           this.tokens.push(this.token_list["number"]);
           break;
