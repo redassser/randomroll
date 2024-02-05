@@ -19,14 +19,14 @@ interface token {
 })
 export class set {
   title: string = "";
-  func: string = "" // might change to another struct later
+  func: string = ""
   private tokens: token[] = [];
   private token!: token;
   token_index: number = 0;
   working_val: number = 0;
   constructor() {
     this.func = "1d" + Math.floor(Math.random() * 6 + 1);
-    this.title = this.func;
+    this.title = "new"
   }
   readonly token_list: { [key: string]: token } = {
     "+": {

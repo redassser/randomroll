@@ -31,6 +31,9 @@
   width: 60px;
   background-color: red;
 }
+.settrid {
+  height: 20px;
+}
 .settop {
   height: 20px;
   display: flex;
