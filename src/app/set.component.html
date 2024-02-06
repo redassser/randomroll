@@ -1,8 +1,5 @@
 <div class="set">
-  <div class="settop">
-    <button class="setbutton" (click)="setLook()"></button>
-    <div class="settitle">{{title}}</div>
-  </div>
+  <div class="settop" [ngStyle]="{'border': selected ? '1px solid red' : '1px solid black' }" (click)="setLook()">{{title}}</div>
   <ng-container class="res" #viewContainerRef/>
 </div>
 <router-outlet></router-outlet>

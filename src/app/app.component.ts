@@ -40,8 +40,11 @@ export class AppComponent {
     return this.ref.instance;
   }
   setLooking(set: set) {
+    if(this.lookingset)
+      this.lookingset.selected = false;
     this.looking = set.func;
     this.lookingset = set;
+    this.lookingset.selected = true;
   }
   onKey(event: any) {
     console.log(event.target.value);

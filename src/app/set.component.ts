@@ -20,6 +20,7 @@ interface token {
 export class set {
   title: string = "";
   func: string = ""
+  selected: boolean = false;
   private tokens: token[] = [];
   private token!: token;
   token_index: number = 0;
