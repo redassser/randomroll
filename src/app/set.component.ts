@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { trid } from './trid.component';
 
-var reg = /\s*(?<dice>\d*d\d+)|(?<number>\d+)|(?<operator>\+|\-|\*|\/\/|\/|\(|\))/g;
+var reg = /\s*(?<dice>\d*d\d+)|(?<number>[0-9\.]+)|(?<operator>\+|\-|\*|\/\/|\/|\(|\))/g;
 interface token {
   value: string | number,
   lbp: number,
@@ -24,10 +24,9 @@ export class set {
   private tokens: token[] = [];
   private token!: token;
   token_index: number = 0;
-  working_val: number = 0;
   constructor() {
     this.func = "1d" + Math.floor(Math.random() * 6 + 1);
-    this.title = "new"
+    this.title = "new";
   }
   readonly token_list: { [key: string]: token } = {
     "+": {
@@ -78,10 +77,6 @@ export class set {
       value: ")",
       lbp: 0,
     },
-    "number": {
-      value: this.working_val,
-      lbp: 0, nud: () => this.working_val
-    },
     "end": {
       value: "end",
       lbp: 0
@@ -109,14 +104,15 @@ export class set {
     this.tokens = [];
     for (const match of matches!) {
       let type = Object.keys(match.groups!).find(key => match.groups![key]);
+      let num: number = 0;
       switch(type) {
         case "number":
-          this.working_val = Number(match[0]);
-          this.tokens.push(this.token_list["number"]);
+          num = Number(match[0]);
+          this.tokens.push({value: num, lbp: 0, nud: ()=>num});
           break;
         case "dice":
-          this.working_val = this.rand(Number(match[0].split('d')[0]), Number(match[0].split('d')[1]), 0)
-          this.tokens.push(this.token_list["number"]);
+          num = this.rand(Number(match[0].split('d')[0]), Number(match[0].split('d')[1]), 0)
+          this.tokens.push({value: num, lbp: 0, nud: ()=>num});
           break;
         default:
           this.tokens.push(this.token_list[match[0]]);
@@ -124,6 +120,7 @@ export class set {
       }
     }
     this.tokens.push(this.token_list["end"]);
+    console.log(this.tokens);
   }
   private expression(rbp: number = 0): number {
     var t: token = this.token;

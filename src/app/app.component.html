@@ -1,5 +1,6 @@
 <div class="table">
-  <input class="look" (keyup)="onKey($event)" value={{looking}}/>
+  <input class="look" (keyup)="onKeyLook($event)" value={{looking}}/>
+  <input class="look" (keyup)="onKeySee($event)" value={{seeing}}/>
   <div class="verts">
     <div class="indexes"><indexnum/><ng-container #viewContainerRef2/></div>
     <ng-container class="sets" #viewContainerRef/>

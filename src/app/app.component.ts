@@ -27,6 +27,7 @@ export class indexnum {
 })
 export class AppComponent {
   looking: string = "";
+  seeing: string = "";
   lookingset!: set;
   lookingLock: boolean = false;
   refArray: ComponentRef<set>[] = [];
@@ -43,12 +44,16 @@ export class AppComponent {
     if(this.lookingset)
       this.lookingset.selected = false;
     this.looking = set.func;
+    this.seeing = set.title;
     this.lookingset = set;
     this.lookingset.selected = true;
   }
-  onKey(event: any) {
+  onKeyLook(event: any) {
     console.log(event.target.value);
     this.lookingset.func = event.target.value;
+  }
+  onKeySee(event: any) {
+    this.lookingset.title = event.target.value;
   }
   Results() {
     this.vcr2.createComponent(indexnum);
