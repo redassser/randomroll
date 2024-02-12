@@ -6,9 +6,9 @@
 }
 .verts {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+  height: 100%;
+  background-color: brown;
+  overflow: scroll;
 }
 .look {
   width: 100%;
@@ -19,11 +19,16 @@
   padding: 0;
 }
 .indexes {
+  position: absolute;
+  margin-left: -20px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   width: 20px;
   gap: 10px;
+  overflow-y: hidden;
+  background-color: chartreuse;
 }
 .index {
   height: 20px;
@@ -31,7 +36,11 @@
   border: 1px solid black;
 }
 .sets {
-  width:100%;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  gap: 10px;
+  background-color: burlywood;
 }
 .set {
   display: flex;

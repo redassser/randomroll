@@ -2,10 +2,11 @@
   <input class="look" (keyup)="onKeyLook($event)" value={{looking}}/>
   <input class="look" (keyup)="onKeySee($event)" value={{seeing}}/>
   <div class="verts">
-    <div class="indexes"><indexnum/><ng-container #viewContainerRef2/></div>
-    <ng-container class="sets" #viewContainerRef/>
+    <div class="indexes" id="indexes" #indexes><indexnum/><ng-container #viewContainerRef2/></div>
+    <div class="sets" id="sets"><ng-container #viewContainerRef/></div>
   </div>
 </div>
 <button (click)="addChild()">Create</button>
 <button (click)="Results()">Results</button>
+<button (click)="replicate()">+</button>
 <router-outlet></router-outlet>

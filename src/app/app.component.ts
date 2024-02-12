@@ -38,7 +38,13 @@ export class AppComponent {
     this.ref = this.vcr.createComponent(set);
     this.refArray.push(this.ref);
     this.ref.instance.newLookEvent.subscribe((v: set) => { this.setLooking(v) });
-    return this.ref.instance;
+    this.setLooking(this.ref.instance);
+  }
+  replicate() {
+    let h: set = this.refArray[this.refArray.length-1].instance;
+    this.addChild();
+    this.lookingset.func = h.func;
+    this.lookingset.title = h.title;
   }
   setLooking(set: set) {
     if(this.lookingset)
@@ -61,5 +67,6 @@ export class AppComponent {
       ref.instance.Result();
     });
   }
+  
 }
 
