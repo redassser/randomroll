@@ -1,4 +1,4 @@
-import { Component, ComponentRef, ViewChild, ViewContainerRef, inject } from '@angular/core';
+import { Component, ComponentRef, ElementRef, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { CommonModule, NgComponentOutlet } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { set } from './set.component';
@@ -31,6 +31,9 @@ export class AppComponent {
   lookingset!: set;
   lookingLock: boolean = false;
   refArray: ComponentRef<set>[] = [];
+  @ViewChild('indexes') indexes!: ElementRef;
+  @ViewChild('verts') verts!: ElementRef;
+
   @ViewChild("viewContainerRef2", { read: ViewContainerRef }) vcr2!: ViewContainerRef;
   @ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
   ref!: ComponentRef<set>;
@@ -39,6 +42,11 @@ export class AppComponent {
     this.refArray.push(this.ref);
     this.ref.instance.newLookEvent.subscribe((v: set) => { this.setLooking(v) });
     this.setLooking(this.ref.instance);
+  }
+  updateScroll() {
+    const indexes = this.indexes.nativeElement as HTMLElement;
+    const verts = this.verts.nativeElement as HTMLElement;
+    indexes.scrollTop = verts.scrollTop;
   }
   replicate() {
     let h: set = this.refArray[this.refArray.length-1].instance;
@@ -55,7 +63,6 @@ export class AppComponent {
     this.lookingset.selected = true;
   }
   onKeyLook(event: any) {
-    console.log(event.target.value);
     this.lookingset.func = event.target.value;
   }
   onKeySee(event: any) {

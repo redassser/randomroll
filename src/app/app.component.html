@@ -1,9 +1,9 @@
 <div class="table">
   <input class="look" (keyup)="onKeyLook($event)" value={{looking}}/>
   <input class="look" (keyup)="onKeySee($event)" value={{seeing}}/>
-  <div class="verts">
-    <div class="indexes" id="indexes" #indexes><indexnum/><ng-container #viewContainerRef2/></div>
-    <div class="sets" id="sets"><ng-container #viewContainerRef/></div>
+  <div class="verts" #verts (scroll)="updateScroll()">
+    <div class="indexes" #indexes><indexnum/><ng-container #viewContainerRef2/></div>
+    <div class="sets"><ng-container #viewContainerRef/></div>
   </div>
 </div>
 <button (click)="addChild()">Create</button>
